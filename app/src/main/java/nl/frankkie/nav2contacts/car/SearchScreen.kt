@@ -12,9 +12,9 @@ import nl.frankkie.nav2contacts.R
 
 class SearchScreen(carContext: CarContext) : Screen(carContext) {
 
-    var searchResults = arrayListOf<MyContact>()
+    var searchResults: ArrayList<MyContact>? = null
 
-    val searchListener = object : SearchListener {
+    private val searchListener = object : SearchListener {
         override fun onSearchTextChanged(searchText: String) {
             searchContacts(searchText)
         }
@@ -30,8 +30,13 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
         searchTemplate.setInitialSearchText("")
         searchTemplate.setHeaderAction(Action.BACK)
         searchTemplate.setSearchHint(carContext.getString(R.string.search_contact))
-        if (searchResults.isNotEmpty()) {
-            searchTemplate.setItemList(buildItemList())
+        if (searchResults == null) {
+            searchContacts("") //try to get list of favorites
+        }
+        searchResults?.let {
+            if (it.isNotEmpty()) {
+                searchTemplate.setItemList(buildItemList())
+            }
         }
         searchTemplate.setActionStrip(buildActionStrip())
         return searchTemplate.build()
@@ -65,32 +70,37 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
 
     private fun buildItemList(): ItemList {
         val builder = ItemList.builder()
-        searchResults.map {
-            val rowBuilder = Row.builder()
-            rowBuilder.setTitle(it.name)
-            rowBuilder.addText(it.addresses.size.toString() + carContext.getString(R.string.x_addresses_found))
-            if (it.starred) {
-                rowBuilder.setImage(
-                    CarIcon.of(
-                        IconCompat.createWithResource(
-                            carContext,
-                            R.drawable.ic_star
+        if (searchResults == null) {
+            searchContacts("")
+        }
+        searchResults?.let { safeSearchResults ->
+            safeSearchResults.map {
+                val rowBuilder = Row.builder()
+                rowBuilder.setTitle(it.name)
+                rowBuilder.addText(it.addresses.size.toString() + carContext.getString(R.string.x_addresses_found))
+                if (it.starred) {
+                    rowBuilder.setImage(
+                        CarIcon.of(
+                            IconCompat.createWithResource(
+                                carContext,
+                                R.drawable.ic_star
+                            )
                         )
                     )
-                )
-            } else {
-                rowBuilder.setImage(
-                    CarIcon.of(
-                        IconCompat.createWithResource(
-                            carContext,
-                            R.drawable.ic_star_outline
+                } else {
+                    rowBuilder.setImage(
+                        CarIcon.of(
+                            IconCompat.createWithResource(
+                                carContext,
+                                R.drawable.ic_star_outline
+                            )
                         )
                     )
-                )
-            }
-            rowBuilder.setOnClickListener { clickedContact(it) }
+                }
+                rowBuilder.setOnClickListener { clickedContact(it) }
 
-            builder.addItem(rowBuilder.build())
+                builder.addItem(rowBuilder.build())
+            }
         }
         return builder.build()
     }
@@ -101,24 +111,46 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
     }
 
     private fun searchContacts(searchText: String) {
-        val cursor = carContext.contentResolver.query(
-            ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI,
-            arrayOf(
-                ContactsContract.CommonDataKinds.StructuredPostal._ID,
-                ContactsContract.CommonDataKinds.StructuredPostal.DISPLAY_NAME,
-                ContactsContract.CommonDataKinds.StructuredPostal.STARRED,
-                ContactsContract.CommonDataKinds.StructuredPostal.STREET,
-                ContactsContract.CommonDataKinds.StructuredPostal.CITY,
-                ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY
-            ),
-            ContactsContract.CommonDataKinds.StructuredPostal.DISPLAY_NAME + " like ?",
-            arrayOf("%$searchText%"),
-            ContactsContract.Contacts.DISPLAY_NAME + " ASC"
-        )
+        val cursor =
+            if (searchText.isNotBlank()) {
+                carContext.contentResolver.query(
+                    ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI,
+                    arrayOf(
+                        ContactsContract.CommonDataKinds.StructuredPostal._ID,
+                        ContactsContract.CommonDataKinds.StructuredPostal.DISPLAY_NAME,
+                        ContactsContract.CommonDataKinds.StructuredPostal.STARRED,
+                        ContactsContract.CommonDataKinds.StructuredPostal.STREET,
+                        ContactsContract.CommonDataKinds.StructuredPostal.CITY,
+                        ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY
+                    ),
+                    ContactsContract.CommonDataKinds.StructuredPostal.DISPLAY_NAME + " like ?",
+                    arrayOf("%$searchText%"),
+                    ContactsContract.Contacts.DISPLAY_NAME + " ASC"
+                )
+            } else {
+                carContext.contentResolver.query(
+                    ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI,
+                    arrayOf(
+                        ContactsContract.CommonDataKinds.StructuredPostal._ID,
+                        ContactsContract.CommonDataKinds.StructuredPostal.DISPLAY_NAME,
+                        ContactsContract.CommonDataKinds.StructuredPostal.STARRED,
+                        ContactsContract.CommonDataKinds.StructuredPostal.STREET,
+                        ContactsContract.CommonDataKinds.StructuredPostal.CITY,
+                        ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY
+                    ),
+                    null,
+                    null,
+                    ContactsContract.Contacts.DISPLAY_NAME + " ASC"
+                )
+            }
         cursor?.let { safeCursor ->
             val tempSearchResults = arrayListOf<MyContact>()
-            val starredOnlyFilter = PreferenceManager.getDefaultSharedPreferences(carContext)
-                .getBoolean(SettingsScreen.PREF_FAVORITES_ONLY, false)
+            val starredOnlyFilter = if (searchText.isNotBlank()) {
+                PreferenceManager.getDefaultSharedPreferences(carContext)
+                    .getBoolean(SettingsScreen.PREF_FAVORITES_ONLY, false)
+            } else {
+                true
+            }
             while (cursor.moveToNext()) {
 
                 //Contact
@@ -162,10 +194,15 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
             }
             safeCursor.close()
             //max 6
-            searchResults.clear()
-            tempSearchResults.forEach { myContact ->
-                if (searchResults.size < 6) {
-                    searchResults.add(myContact)
+            if (searchResults == null) {
+                searchResults = arrayListOf()
+            }
+            searchResults?.let { safeSearchResults ->
+                safeSearchResults.clear()
+                tempSearchResults.forEach { myContact ->
+                    if (safeSearchResults.size < 6) {
+                        safeSearchResults.add(myContact)
+                    }
                 }
             }
         }

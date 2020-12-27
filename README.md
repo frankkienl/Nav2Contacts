@@ -4,7 +4,12 @@ With this app will search for addresses in your contacts, so make sure your cont
 This app will need contacts permission and location permission.  
 No user data will ever leave your phone.
 
+## Demo video
+Demo video: https://github.com/frankkienl/Nav2Contacts/blob/master/Demo-Nav2Contacts.mp4  
+
 ## How to install
+Download APK-file: https://github.com/frankkienl/Nav2Contacts/blob/master/Nav2Contacts-release.apk  
+
 Perform the following ADB-commands to install the app:  
 ```
 adb push Nav2Contacts-release.apk /data/local/tmp/app.apk

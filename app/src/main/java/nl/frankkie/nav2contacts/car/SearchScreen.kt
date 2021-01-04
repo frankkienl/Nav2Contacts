@@ -27,6 +27,7 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
 
     override fun getTemplate(): Template {
         val searchTemplate = SearchTemplate.builder(searchListener)
+        searchTemplate.setShowKeyboardByDefault(false)
         searchTemplate.setInitialSearchText("")
         searchTemplate.setHeaderAction(Action.BACK)
         searchTemplate.setSearchHint(carContext.getString(R.string.search_contact))

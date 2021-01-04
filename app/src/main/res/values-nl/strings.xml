@@ -17,10 +17,10 @@
     <string name="grant_permissions">Geef benodigde permissies</string>
     <string name="about_this_app">Deze app laat je navigeren naar contactpersonen via Android Auto</string>
     <string name="distance">afstand</string>
-    <string name="notification_channel_name">Foreground service for location</string>
-    <string name="notification_channel_description">Needed for location service</string>
+    <string name="notification_channel_name">Voorgrond service nodig voor locatie</string>
+    <string name="notification_channel_description">Nodig voor locatie service</string>
     <string name="navigate">Navigeer</string>
     <string name="navigate_to">Navigeer naar:</string>
-    <string name="settings">Settings</string>
-    <string name="favorites_only">Favorites only</string>
+    <string name="settings">Instellingen</string>
+    <string name="favorites_only">Zoek alleen favorieten</string>
 </resources>

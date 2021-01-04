@@ -9,7 +9,10 @@
     <string name="search_contact">Search contact</string>
     <string name="and_1_more_address">(and 1 other address)</string>
     <string name="and_x_more_addresses">(and %s other addresses)</string>
-    <string name="x_addresses_found">" address(es) found"</string>
+    <plurals name="x_addresses_found">
+        <item quantity="one">%d address found.</item>
+        <item quantity="other">%d addresses found.</item>
+    </plurals>
     <string name="grant_permissions">Grant permissions</string>
     <string name="about_this_app">This app allows you to navigate to contacts via Android Auto</string>
     <string name="distance">distance</string>

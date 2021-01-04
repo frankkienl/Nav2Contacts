@@ -77,7 +77,13 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
             safeSearchResults.map {
                 val rowBuilder = Row.builder()
                 rowBuilder.setTitle(it.name)
-                rowBuilder.addText(it.addresses.size.toString() + carContext.getString(R.string.x_addresses_found))
+                rowBuilder.addText(
+                    carContext.resources.getQuantityString(
+                        R.plurals.x_addresses_found,
+                        it.addresses.size,
+                        it.addresses.size
+                    )
+                )
                 if (it.starred) {
                     rowBuilder.setImage(
                         CarIcon.of(

@@ -15,10 +15,10 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.libraries.car.app.CarContext
-import com.google.android.libraries.car.app.Screen
-import com.google.android.libraries.car.app.ScreenManager
-import com.google.android.libraries.car.app.model.*
+import androidx.car.app.CarContext
+import androidx.car.app.Screen
+import androidx.car.app.ScreenManager
+import androidx.car.app.model.*
 import nl.frankkie.nav2contacts.R
 import nl.frankkie.nav2contacts.getDistanceFromLatLonInKm
 import nl.frankkie.nav2contacts.getLatLngFromAddress
@@ -103,27 +103,29 @@ class NamesOnMapScreen(
     }
 
 
-    override fun getTemplate(): Template {
-        val placeListMapTemplate = PlaceListMapTemplate.builder()
+    override fun onGetTemplate(): Template {
+        val placeListMapTemplate = PlaceListMapTemplate.Builder()
         placeListMapTemplate.setHeaderAction(Action.BACK)
         placeListMapTemplate.setCurrentLocationEnabled(true)
 
 
         if (currentLocation == null) {
             if (action == ACTION_CONTACT) {
-                placeListMapTemplate.setTitle(contact?.name)
+                contact?.let {
+                    placeListMapTemplate.setTitle(it.name)
+                }
             }
-            placeListMapTemplate.setIsLoading(true)
+            placeListMapTemplate.setLoading(true)
             return placeListMapTemplate.build()
         }
 
         currentLocation?.let {
-            placeListMapTemplate.setAnchor(Place.builder(LatLng.create(it)).build())
+            placeListMapTemplate.setAnchor(Place.Builder(CarLocation.create(it)).build())
         }
 
         if (action == ACTION_CONTACT) {
             if (contact == null || !geocodingDone) {
-                placeListMapTemplate.setIsLoading(true)
+                placeListMapTemplate.setLoading(true)
                 return placeListMapTemplate.build()
             }
 
@@ -137,7 +139,7 @@ class NamesOnMapScreen(
 
 
     private fun buildItemList(contactAddresses: ArrayList<MyContactAddress>): ItemList.Builder {
-        val itemListBuilder = ItemList.builder()
+        val itemListBuilder = ItemList.Builder()
         if (!geocodingDone) {
             //No geocode, no nothing.
             return itemListBuilder
@@ -146,28 +148,26 @@ class NamesOnMapScreen(
         var contactAddressesLabel = 1
         contactAddresses.forEach { address ->
 
-            val rowBuilder = Row.builder()
+            val rowBuilder = Row.Builder()
 
             //Title
             val addressString = "${address.street}, ${address.city}"
             rowBuilder.setTitle(addressString)
 
             //Metadata
-            rowBuilder.setMetadata(
-                Metadata.ofPlace(
-                    Place.builder(
-                        LatLng.create(
-                            address.latitude ?: 0.0,
-                            address.longitude ?: 0.0
-                        )
-                    )
-                        //.setMarker(PlaceMarker.getDefault())
-                        .setMarker(
-                            PlaceMarker.builder().setColor(CarColor.GREEN)
-                                .setLabel(contactAddressesLabel++.toString()).build()
-                        )
-                        .build()
+            val placeMarker = PlaceMarker.Builder().setColor(CarColor.GREEN)
+                .setLabel(contactAddressesLabel++.toString()).build()
+            val placeBuilder = Place.Builder(
+                CarLocation.create(
+                    address.latitude ?: 0.0,
+                    address.longitude ?: 0.0
                 )
+            )
+            placeBuilder.setMarker(placeMarker)
+            val metadataBuilder =  Metadata.Builder()
+            metadataBuilder.setPlace(placeBuilder.build())
+            rowBuilder.setMetadata(
+               metadataBuilder.build()
             )
 
             //Distance
@@ -193,7 +193,7 @@ class NamesOnMapScreen(
             rowBuilder.addText(string)
             rowBuilder.setOnClickListener {
                 //show the destination detail screen
-                val screenManager = carContext.getCarService(CarContext.SCREEN_MANAGER_SERVICE) as ScreenManager
+                val screenManager = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
                 screenManager.push(DestinationInfoScreen(carContext, contact!!, address))
             }
 

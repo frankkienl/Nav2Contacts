@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.location.Geocoder
 import android.net.Uri
-import com.google.android.libraries.car.app.CarContext
+import androidx.car.app.CarContext
 import nl.frankkie.nav2contacts.car.MyContactAddress
 import kotlin.math.atan2
 import kotlin.math.cos

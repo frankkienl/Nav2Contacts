@@ -3,18 +3,17 @@ package nl.frankkie.nav2contacts.car
 import android.provider.ContactsContract
 import androidx.core.graphics.drawable.IconCompat
 import androidx.preference.PreferenceManager
-import com.google.android.libraries.car.app.CarContext
-import com.google.android.libraries.car.app.Screen
-import com.google.android.libraries.car.app.ScreenManager
-import com.google.android.libraries.car.app.SearchListener
-import com.google.android.libraries.car.app.model.*
+import androidx.car.app.CarContext
+import androidx.car.app.Screen
+import androidx.car.app.ScreenManager
+import androidx.car.app.model.*
 import nl.frankkie.nav2contacts.R
 
 class SearchScreen(carContext: CarContext) : Screen(carContext) {
 
     var searchResults: ArrayList<MyContact>? = null
 
-    private val searchListener = object : SearchListener {
+    private val searchListener = object : SearchTemplate.SearchCallback {
         override fun onSearchTextChanged(searchText: String) {
             searchContacts(searchText)
         }
@@ -25,8 +24,8 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
 
     }
 
-    override fun getTemplate(): Template {
-        val searchTemplate = SearchTemplate.builder(searchListener)
+    override fun onGetTemplate(): Template {
+        val searchTemplate = SearchTemplate.Builder(searchListener)
         searchTemplate.setShowKeyboardByDefault(false)
         searchTemplate.setInitialSearchText("")
         searchTemplate.setHeaderAction(Action.BACK)
@@ -44,16 +43,16 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
     }
 
     private fun buildActionStrip(): ActionStrip {
-        val actionStripBuilder = ActionStrip.builder()
+        val actionStripBuilder = ActionStrip.Builder()
         actionStripBuilder.addAction(
-            Action.builder()
+            Action.Builder()
                 .setIcon(
-                    CarIcon.of(
+                    CarIcon.Builder(
                         IconCompat.createWithResource(
                             carContext,
                             R.drawable.ic_settings
                         )
-                    )
+                    ).build()
                 )
                 .setOnClickListener {
                     goToSettingsScreen()
@@ -65,18 +64,18 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
 
     private fun goToSettingsScreen() {
         val screenManager =
-            carContext.getCarService(CarContext.SCREEN_MANAGER_SERVICE) as ScreenManager
+            carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
         screenManager.push(SettingsScreen(carContext))
     }
 
     private fun buildItemList(): ItemList {
-        val builder = ItemList.builder()
+        val builder = ItemList.Builder()
         if (searchResults == null) {
             searchContacts("")
         }
         searchResults?.let { safeSearchResults ->
             safeSearchResults.map {
-                val rowBuilder = Row.builder()
+                val rowBuilder = Row.Builder()
                 rowBuilder.setTitle(it.name)
                 rowBuilder.addText(
                     carContext.resources.getQuantityString(
@@ -87,21 +86,21 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
                 )
                 if (it.starred) {
                     rowBuilder.setImage(
-                        CarIcon.of(
+                        CarIcon.Builder(
                             IconCompat.createWithResource(
                                 carContext,
                                 R.drawable.ic_star
                             )
-                        )
+                        ).build()
                     )
                 } else {
                     rowBuilder.setImage(
-                        CarIcon.of(
+                        CarIcon.Builder(
                             IconCompat.createWithResource(
                                 carContext,
                                 R.drawable.ic_star_outline
                             )
-                        )
+                        ).build()
                     )
                 }
                 rowBuilder.setOnClickListener { clickedContact(it) }
@@ -113,7 +112,7 @@ class SearchScreen(carContext: CarContext) : Screen(carContext) {
     }
 
     private fun clickedContact(contact: MyContact) {
-        val sc = carContext.getCarService(CarContext.SCREEN_MANAGER_SERVICE) as ScreenManager
+        val sc = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
         sc.push(NamesOnMapScreen(carContext, NamesOnMapScreen.ACTION_CONTACT, contact))
     }
 

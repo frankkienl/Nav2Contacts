@@ -202,19 +202,6 @@ public final class MessageTemplate implements Template {
         }
 
         /**
-         * Sets the message of the template
-         *
-         * <p>Unless set with this method, the template will not have a message
-         *
-         * @throws NullPointerException if {@code message} is {@code null}
-         */
-        @NonNull
-        public Builder setMessage(@NonNull CharSequence message) {
-            mMessage = CarText.create(requireNonNull(message));
-            return this;
-        }
-
-        /**
          * Sets a {@link Throwable} for debugging purposes.
          *
          * <p>The cause will be displayed along with the message set in

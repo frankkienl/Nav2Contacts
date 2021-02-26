@@ -60,7 +60,10 @@ dependencies {
 //    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
 //    implementation 'com.google.apis:google-api-services-people:v1-rev20201111-1.30.10'
 
+    //Android Auto
     //implementation 'com.google.android.libraries.car:car-app:1.0.0-beta.1'
+    implementation 'androidx.car.app:app:1.0.0-beta01'
+
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-service:2.2.0"
     //kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"

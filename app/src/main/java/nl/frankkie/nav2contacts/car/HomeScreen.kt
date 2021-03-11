@@ -12,10 +12,10 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.libraries.car.app.CarContext
-import com.google.android.libraries.car.app.Screen
-import com.google.android.libraries.car.app.ScreenManager
-import com.google.android.libraries.car.app.model.*
+import androidx.car.app.CarContext
+import androidx.car.app.Screen
+import androidx.car.app.ScreenManager
+import androidx.car.app.model.*
 import nl.frankkie.nav2contacts.R
 
 
@@ -60,44 +60,44 @@ class HomeScreen(carContext: CarContext) : Screen(carContext) {
 
     var currentLocation: Location? = null
 
-    override fun getTemplate(): Template {
-        val placeListMapTemplateBuilder = PlaceListMapTemplate.builder()
+    override fun onGetTemplate(): Template {
+        val placeListMapTemplateBuilder = PlaceListMapTemplate.Builder()
         placeListMapTemplateBuilder.setTitle(carContext.getString(R.string.app_name))
         placeListMapTemplateBuilder.setHeaderAction(Action.APP_ICON)
         placeListMapTemplateBuilder.setCurrentLocationEnabled(true)
 
         //current location
         currentLocation?.let {
-            val place = Place.builder(LatLng.create(it)).build()
+            val place = Place.Builder(CarLocation.create(it)).build()
             placeListMapTemplateBuilder.setAnchor(place)
         }
 
         //Set menu items
-        val itemListBuilder = ItemList.builder()
+        val itemListBuilder = ItemList.Builder()
 //        itemListBuilder.addItem(
-//            Row.builder()
+//            Row.Builder()
 //                .setIsBrowsable(true)
 //                .setTitle(carContext.getString(R.string.favorites))
 //                .setOnClickListener { clickedFavorites() }
 //                .build()
 //        )
 //        itemListBuilder.addItem(
-//            Row.builder()
+//            Row.Builder()
 //                .setIsBrowsable(true)
 //                .setTitle(carContext.getString(R.string.nearby))
 //                .setOnClickListener { clickedNearby() }
 //                .build()
 //        )
         itemListBuilder.addItem(
-            Row.builder()
-                .setIsBrowsable(true)
+            Row.Builder()
+                .setBrowsable(true)
                 .setTitle(carContext.getString(R.string.search))
                 .setOnClickListener { clickedSearch() }
                 .build()
         )
         itemListBuilder.addItem(
-            Row.builder()
-                .setIsBrowsable(true)
+            Row.Builder()
+                .setBrowsable(true)
                 .setTitle(carContext.getString(R.string.about))
                 .setOnClickListener { clickedAbout() }
                 .build()
@@ -108,22 +108,22 @@ class HomeScreen(carContext: CarContext) : Screen(carContext) {
     }
 
     private fun clickedFavorites() {
-        val sc = carContext.getCarService(CarContext.SCREEN_MANAGER_SERVICE) as ScreenManager
+        val sc = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
         sc.push(NamesOnMapScreen(carContext, NamesOnMapScreen.ACTION_FAVORITES))
     }
 
     private fun clickedNearby() {
-        val sc = carContext.getCarService(CarContext.SCREEN_MANAGER_SERVICE) as ScreenManager
+        val sc = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
         sc.push(NamesOnMapScreen(carContext, NamesOnMapScreen.ACTION_NEARBY))
     }
 
     private fun clickedSearch() {
-        val sc = carContext.getCarService(CarContext.SCREEN_MANAGER_SERVICE) as ScreenManager
+        val sc = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
         sc.push(SearchScreen(carContext))
     }
 
     private fun clickedAbout() {
-        val sc = carContext.getCarService(CarContext.SCREEN_MANAGER_SERVICE) as ScreenManager
+        val sc = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
         sc.push(AboutScreen(carContext))
     }
 

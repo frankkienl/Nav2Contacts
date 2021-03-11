@@ -1,8 +1,8 @@
 package nl.frankkie.nav2contacts.car
 
-import com.google.android.libraries.car.app.CarContext
-import com.google.android.libraries.car.app.Screen
-import com.google.android.libraries.car.app.model.*
+import androidx.car.app.CarContext
+import androidx.car.app.Screen
+import androidx.car.app.model.*
 import nl.frankkie.nav2contacts.R
 import nl.frankkie.nav2contacts.navigateToContactAddress
 
@@ -12,26 +12,28 @@ class DestinationInfoScreen(
     private val contactAddress: MyContactAddress
 ) : Screen(carContext) {
 
-    override fun getTemplate(): Template {
-        val template = MessageTemplate.builder(carContext.getString(R.string.navigate_to) + " ${contact.name}\n${contactAddress.street}, ${contactAddress.city}")
-        template.setHeaderAction(Action.BACK)
-        template.setIcon(CarIcon.APP_ICON)
-        template.setActions(buildActions(carContext, contact, contactAddress))
-        return template.build()
+    override fun onGetTemplate(): Template {
+        val templateBuilder =
+            MessageTemplate.Builder(carContext.getString(R.string.navigate_to) + " ${contact.name}\n${contactAddress.street}, ${contactAddress.city}")
+        templateBuilder.setHeaderAction(Action.BACK)
+        templateBuilder.setIcon(CarIcon.APP_ICON)
+        buildAction(carContext, contact, contactAddress, templateBuilder)
+        return templateBuilder.build()
     }
 
-    private fun buildActions(
+    private fun buildAction(
         carContext: CarContext,
         contact: MyContact,
-        contactAddress: MyContactAddress
-    ): List<Action> {
-        val actionBuilder = Action.builder()
+        contactAddress: MyContactAddress,
+        templateBuilder: MessageTemplate.Builder
+    ) {
+        val actionBuilder = Action.Builder()
             .setBackgroundColor(CarColor.GREEN)
             .setTitle(carContext.getString(R.string.navigate))
             .setOnClickListener {
                 navigateToContactAddress(carContext, contactAddress)
             }
-        return listOf(actionBuilder.build())
+        templateBuilder.addAction(actionBuilder.build())
     }
 
 }

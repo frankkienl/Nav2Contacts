@@ -1,16 +1,32 @@
 package nl.frankkie.nav2contacts.car
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import androidx.core.content.ContextCompat
-import com.google.android.libraries.car.app.CarAppService
-import com.google.android.libraries.car.app.Screen
+import android.content.res.Configuration
+import androidx.car.app.CarAppService
+import androidx.car.app.Screen
+import androidx.car.app.Session
+import androidx.car.app.validation.HostValidator
 
 
 class MyCarAppService : CarAppService() {
-    override fun onCreateScreen(intent: Intent): Screen {
 
-        return HomeScreen(carContext)
+    private val session = object : Session() {
+        override fun onCreateScreen(intent: Intent): Screen {
+            return HomeScreen(carContext)
+        }
+
+        override fun onCarConfigurationChanged(newConfiguration: Configuration) {
+        }
+
+        override fun onNewIntent(intent: Intent) {
+        }
+    }
+
+    override fun createHostValidator(): HostValidator {
+        return HostValidator.ALLOW_ALL_HOSTS_VALIDATOR
+    }
+
+    override fun onCreateSession(): Session {
+        return session
     }
 }

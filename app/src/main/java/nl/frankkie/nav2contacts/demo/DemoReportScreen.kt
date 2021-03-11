@@ -65,7 +65,7 @@ class DemoReportScreen(carContext: CarContext, val useGrid: Boolean = false) : S
             templateBuilder.setTitle("Grid MaxSpeed report")
             templateBuilder.setSingleList(buildList(carContext))
 
-            //this is a (small) pain point;
+            //Pain point;
             //Setting the ActionStrip to null should be allowed (compiling error)
             //Setting an empty ActionStrip should be allowed (runtime crash!!!!!!!!!!!!!)
             //Never should we have to expect runtime crashes for things like this!
@@ -89,6 +89,7 @@ class DemoReportScreen(carContext: CarContext, val useGrid: Boolean = false) : S
         val itemListBuilder = ItemList.Builder()
         //Pain point,
         //We need more than 6 options. Automatic paging would be welcome!
+        //Making the limit like 8 probably won't increase driver distraction very much.
         val speeds = arrayOf(15, 30, 50, 60, 70, 80 /* , 90, 100, 120, 130 */)
         for (speed in speeds) {
             itemListBuilder.addItem(buildItem(carContext, speed))
@@ -154,6 +155,10 @@ class DemoReportScreen(carContext: CarContext, val useGrid: Boolean = false) : S
     }
 
     private fun buildSignImage(carContext: CarContext, speed: Int): Bitmap {
+        //Small pain point
+        //Using the compose pattern discourages caching,
+        //while images like this could be cached instead of recreated every .invalidate()
+        //Have fun wasting cpu-cycles on garbage collection.
         val width = 64
         val height = 64
         val centerXSpeed = width / 2F

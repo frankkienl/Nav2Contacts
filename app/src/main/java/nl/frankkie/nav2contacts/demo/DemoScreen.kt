@@ -32,11 +32,11 @@ class DemoScreen(carContext: CarContext) : Screen(carContext) {
          2) Allow the functions to take both the Item and the Item.Builder as input
          This can be done with Kotlin extensions. KTX library.
          See the awesome extension function below.
-         3) Allow this like CarIcon to be just a static function,
+         3) Allow things like CarIcon to be just a static function,
          or give us access to the real model classes directly.
          I know you do this to make them "final" and not "reusable",
-         that part of the Compose-pattern,
-         but this doesn't really prevent it anyway and is just annoying.
+         that's part of the Compose-pattern,
+         but this doesn't really prevent that anyway and is just annoying.
 
          None of these pain points are deal-breakers though.
          Can wait for next version of Android Auto.

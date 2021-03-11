@@ -5,6 +5,10 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.util.Log
+import androidx.car.app.CarContext
+import androidx.car.app.Screen
+import androidx.car.app.ScreenManager
+import androidx.car.app.model.*
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -12,14 +16,13 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import androidx.car.app.CarContext
-import androidx.car.app.Screen
-import androidx.car.app.ScreenManager
-import androidx.car.app.model.*
 import nl.frankkie.nav2contacts.R
+import nl.frankkie.nav2contacts.demo.DemoScreen
 
 
 class HomeScreen(carContext: CarContext) : Screen(carContext) {
+
+    val showDemo = true
 
     private val myObserver = object : DefaultLifecycleObserver {
         @SuppressLint("MissingPermission")
@@ -102,6 +105,15 @@ class HomeScreen(carContext: CarContext) : Screen(carContext) {
                 .setOnClickListener { clickedAbout() }
                 .build()
         )
+        if (showDemo) {
+            itemListBuilder.addItem(
+                Row.Builder()
+                    .setBrowsable(true)
+                    .setTitle("Demo")
+                    .setOnClickListener { clickedDemo() }
+                    .build()
+            )
+        }
         placeListMapTemplateBuilder.setItemList(itemListBuilder.build())
 
         return placeListMapTemplateBuilder.build()
@@ -125,6 +137,11 @@ class HomeScreen(carContext: CarContext) : Screen(carContext) {
     private fun clickedAbout() {
         val sc = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
         sc.push(AboutScreen(carContext))
+    }
+
+    private fun clickedDemo() {
+        val sc = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
+        sc.push(DemoScreen(carContext))
     }
 
 

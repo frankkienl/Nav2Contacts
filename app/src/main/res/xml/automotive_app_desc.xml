@@ -1,3 +1,5 @@
-<automotiveApp>
-    <uses name="template" />
+<automotiveApp xmlns:tools="http://schemas.android.com/tools">
+    <!-- the lint-check is giving a false-positive //-->
+    <uses name="template"
+        tools:ignore="InvalidUsesTagAttribute" />
 </automotiveApp>

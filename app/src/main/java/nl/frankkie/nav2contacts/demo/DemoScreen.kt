@@ -73,6 +73,21 @@ class DemoScreen(carContext: CarContext) : Screen(carContext) {
                         .setOnClickListener { clickedReportDemo(true) }
                         .build()
                 )
+                .addItem(
+                    Row.Builder()
+                        .setTitle("Map demo")
+                        .setBrowsable(true)
+                        .setImage(
+                            CarIcon.Builder(
+                                IconCompat.createWithResource(
+                                    carContext,
+                                    R.drawable.reiger
+                                )
+                            ).build()
+                        )
+                        .setOnClickListener { clickedMapDemo(true) }
+                        .build()
+                )
                 .build() //Can you tell in a second, where this .build() belongs too?
         )
 
@@ -83,6 +98,11 @@ class DemoScreen(carContext: CarContext) : Screen(carContext) {
         //Pain point: It shouldn't be needed to do a cast here
         val sm = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
         sm.push(DemoReportScreen(carContext, useGrid))
+    }
+
+    fun clickedMapDemo(useGrid: Boolean) {
+        val sm = carContext.getCarService(ScreenManager::class.java) //no cast :-)
+        sm.push(DemoMapScreen(carContext))
     }
 
 }

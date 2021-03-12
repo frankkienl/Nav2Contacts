@@ -28,7 +28,7 @@ object CarColorContrastUtil {
             if (!darkMode) {
                 foregroundColor.color
             } else {
-                foregroundColor.color
+                foregroundColor.colorDark
             },
             false
         )

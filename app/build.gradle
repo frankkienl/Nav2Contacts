@@ -11,8 +11,8 @@ android {
         applicationId "nl.frankkie.nav2contacts"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 4
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -64,12 +64,12 @@ dependencies {
 
     //Android Auto
     //implementation 'com.google.android.libraries.car:car-app:1.0.0-beta.1'
-    implementation 'androidx.car.app:app:1.0.0-beta01'
+    implementation 'androidx.car.app:app:1.0.0-rc01'
 
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
-    implementation "androidx.lifecycle:lifecycle-service:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-service:2.3.1"
     //kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

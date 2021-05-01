@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Nav2Contacts</string>
-    <string name="notification_channel_name">Foreground service for location</string>
-    <string name="notification_channel_description">Needed for location service</string>
 </resources>

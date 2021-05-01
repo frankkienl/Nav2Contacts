@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             val uri: Uri = Uri.fromParts("package", packageName, null)
             intent.data = uri
             startActivity(intent)
-            Toast.makeText(this, "Please enable 'Read contacts' permission.", Toast.LENGTH_LONG)
+            Toast.makeText(this, "Please enable 'Read contacts' and 'location' permissions.", Toast.LENGTH_LONG)
                 .show()
         }
     }
@@ -61,14 +61,6 @@ class MainActivity : AppCompatActivity() {
             askPermission()
             return
         }
-    }
-
-    private fun openNotificationSettings() {
-        val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {
-            putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-            putExtra(Settings.EXTRA_CHANNEL_ID, nl.frankkie.nav2contacts.common.NOTIFICATION_CHANNEL_ID)
-        }
-        startActivity(intent)
     }
 
 }

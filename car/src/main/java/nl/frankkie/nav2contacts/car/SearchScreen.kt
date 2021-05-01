@@ -7,7 +7,6 @@ import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.ScreenManager
 import androidx.car.app.model.*
-import nl.frankkie.nav2contacts.R
 
 class SearchScreen(carContext: CarContext) : Screen(carContext) {
 

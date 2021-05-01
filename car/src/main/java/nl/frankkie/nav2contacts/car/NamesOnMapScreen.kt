@@ -1,10 +1,8 @@
 package nl.frankkie.nav2contacts.car
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.location.Geocoder
 import android.location.Location
-import android.net.Uri
 import android.os.Handler
 import android.text.SpannableString
 import android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE
@@ -19,7 +17,6 @@ import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.ScreenManager
 import androidx.car.app.model.*
-import nl.frankkie.nav2contacts.R
 import nl.frankkie.nav2contacts.getDistanceFromLatLonInKm
 import nl.frankkie.nav2contacts.getLatLngFromAddress
 

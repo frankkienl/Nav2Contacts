@@ -12,7 +12,11 @@ class MyCarAppService : CarAppService() {
 
     private val session = object : Session() {
         override fun onCreateScreen(intent: Intent): Screen {
-            return HomeScreen(carContext)
+            return if (checkRequiredPermissions(carContext)) {
+                HomeScreen(carContext)
+            } else {
+                ErrorScreen(carContext)
+            }
         }
 
         override fun onCarConfigurationChanged(newConfiguration: Configuration) {

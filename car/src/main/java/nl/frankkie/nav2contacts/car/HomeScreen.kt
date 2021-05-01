@@ -127,18 +127,6 @@ class HomeScreen(carContext: CarContext) : Screen(carContext) {
     }
 
 
-    private fun checkPermissions(): Boolean {
-        //formatting is hard
-        val contacts = ContextCompat.checkSelfPermission(
-            carContext,
-            Manifest.permission.READ_CONTACTS
-        ) == PackageManager.PERMISSION_GRANTED
 
-        val location = ContextCompat.checkSelfPermission(
-            carContext,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-        return contacts && location
-    }
 
 }

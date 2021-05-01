@@ -18,4 +18,5 @@
     <string name="navigate_to">Navigeer naar:</string>
     <string name="settings">Instellingen</string>
     <string name="favorites_only">Zoek alleen favorieten</string>
+    <string name="action_close_app">Sluit app</string>
 </resources>

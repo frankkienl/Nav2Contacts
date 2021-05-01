@@ -17,4 +17,5 @@
     <string name="navigate_to">Navigate to: </string>
     <string name="settings">Settings</string>
     <string name="favorites_only">Search through favorites only</string>
+    <string name="action_close_app">Close app</string>
 </resources>

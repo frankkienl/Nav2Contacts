@@ -12,6 +12,12 @@ class ErrorScreen(carContext: CarContext) : Screen(carContext) {
         return MessageTemplate.Builder(carContext.getString(R.string.error_permissions))
             .setHeaderAction(Action.APP_ICON)
             .setTitle(carContext.getString(R.string.app_name))
+            .addAction(
+                Action.Builder()
+                    .setTitle(carContext.getString(R.string.action_close_app))
+                    .setOnClickListener { carContext.finishCarApp() }
+                .build()
+            )
             .build()
     }
 }

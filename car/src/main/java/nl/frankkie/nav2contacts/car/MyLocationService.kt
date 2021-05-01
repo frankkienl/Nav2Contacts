@@ -9,7 +9,7 @@ import android.os.IBinder
 class MyLocationService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        startNotification()
+        //startNotification()
         return super.onStartCommand(intent, flags, startId)
     }
 

@@ -18,4 +18,5 @@
     <string name="navigate_to">"Naviga verso: "</string>
     <string name="settings">Impostazioni</string>
     <string name="favorites_only">Cerca solo nei preferiti</string>
+    <string name="action_close_app">Chiudi l\'app</string>
 </resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favorites">Preferiti</string>
+    <string name="nearby">Vicini</string>
+    <string name="search">Cerca</string>
+    <string name="about">Info</string>
+    <string name="about_desc">un\'app di FrankkieNL; Per il codice sorgente vedere Github.com/frankkienl</string>
+    <string name="error_permissions">L\'app ha bisogno dei permessi READ_CONTACTS e LOCATION. Concedi questi permessi sul telefono. In seguito riavviare l\'app.</string>
+    <string name="search_contact">Cerca contatto</string>
+    <string name="and_1_more_address">(e un altro indirizzo)</string>
+    <string name="and_x_more_addresses">(e altri %s indirizzi)</string>
+    <plurals name="x_addresses_found">
+        <item quantity="one">%d indirizzo trovato.</item>
+        <item quantity="other">%d indirizzi trovati.</item>
+    </plurals>
+    <string name="distance">Distanza</string>
+    <string name="navigate">Naviga</string>
+    <string name="navigate_to">"Naviga verso: "</string>
+    <string name="settings">Impostazioni</string>
+    <string name="favorites_only">Cerca solo nei preferiti</string>
+</resources>

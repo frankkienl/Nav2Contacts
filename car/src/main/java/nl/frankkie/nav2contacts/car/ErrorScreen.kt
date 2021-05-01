@@ -5,7 +5,6 @@ import androidx.car.app.Screen
 import androidx.car.app.model.Action
 import androidx.car.app.model.MessageTemplate
 import androidx.car.app.model.Template
-import nl.frankkie.nav2contacts.R
 
 class ErrorScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {
@@ -15,5 +14,4 @@ class ErrorScreen(carContext: CarContext) : Screen(carContext) {
             .setTitle(carContext.getString(R.string.app_name))
             .build()
     }
-
 }

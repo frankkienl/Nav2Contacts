@@ -6,7 +6,6 @@ import androidx.car.app.model.Action
 import androidx.car.app.model.CarIcon
 import androidx.car.app.model.MessageTemplate
 import androidx.car.app.model.Template
-import nl.frankkie.nav2contacts.R
 
 class AboutScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {
@@ -16,5 +15,4 @@ class AboutScreen(carContext: CarContext) : Screen(carContext) {
         messageTemplateBuilder.setHeaderAction(Action.BACK)
         return messageTemplateBuilder.build()
     }
-
 }

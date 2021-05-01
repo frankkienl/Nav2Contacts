@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Nav2Contacts</string>
-    <string name="favorites">Favorieten</string>
-    <string name="search">Zoeken</string>
-    <string name="about">Over</string>
-    <string name="about_desc">door FrankkieNL; Voor broncode zie: Github.com/frankkienl</string>
-    <string name="error_permissions">De app heeft READ_CONTACTS en LOCATION permissie nodig. Geef deze permissies op de telefoon. Dan app herstarten.</string>
-    <string name="nearby">Dichtbij</string>
-    <string name="search_contact">Zoek contactpersoon</string>
-    <string name="and_1_more_address">(en 1 ander adres)</string>
-    <string name="and_x_more_addresses">(en %s andere adressen)</string>
-    <plurals name="x_addresses_found">
-        <item quantity="one">%d adres gevonden.</item>
-        <item quantity="other">%d adressen gevonden.</item>
-    </plurals>
     <string name="grant_permissions">Geef benodigde permissies</string>
     <string name="about_this_app">Deze app laat je navigeren naar contactpersonen via Android Auto</string>
-    <string name="distance">afstand</string>
-    <string name="notification_channel_name">Voorgrond service nodig voor locatie</string>
-    <string name="notification_channel_description">Nodig voor locatie service</string>
-    <string name="navigate">Navigeer</string>
-    <string name="navigate_to">Navigeer naar:</string>
-    <string name="settings">Instellingen</string>
-    <string name="favorites_only">Zoek alleen favorieten</string>
 </resources>

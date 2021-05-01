@@ -1,0 +1,20 @@
+<resources>
+    <string name="favorites">Favorites</string>
+    <string name="nearby">Nearby</string>
+    <string name="search">Search</string>
+    <string name="about">About</string>
+    <string name="about_desc">by FrankkieNL; For source-code see Github.com/frankkienl</string>
+    <string name="error_permissions">This app needs READ_CONTACTS and LOCATION permissions. Grant these permission on the phone. Then restart this app.</string>
+    <string name="search_contact">Search contact</string>
+    <string name="and_1_more_address">(and 1 other address)</string>
+    <string name="and_x_more_addresses">(and %s other addresses)</string>
+    <plurals name="x_addresses_found">
+        <item quantity="one">%d address found.</item>
+        <item quantity="other">%d addresses found.</item>
+    </plurals>
+    <string name="distance">distance</string>
+    <string name="navigate">Navigate</string>
+    <string name="navigate_to">Navigate to: </string>
+    <string name="settings">Settings</string>
+    <string name="favorites_only">Search through favorites only</string>
+</resources>

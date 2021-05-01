@@ -3,8 +3,6 @@ package nl.frankkie.nav2contacts.car
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.model.*
-import nl.frankkie.nav2contacts.R
-import nl.frankkie.nav2contacts.navigateToContactAddress
 
 class DestinationInfoScreen(
     carContext: CarContext,

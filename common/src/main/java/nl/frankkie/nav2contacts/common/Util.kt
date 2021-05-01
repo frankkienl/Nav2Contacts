@@ -1,11 +1,7 @@
 package nl.frankkie.nav2contacts
 
 import android.content.Context
-import android.content.Intent
 import android.location.Geocoder
-import android.net.Uri
-import androidx.car.app.CarContext
-import nl.frankkie.nav2contacts.car.MyContactAddress
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
@@ -52,10 +48,3 @@ fun deg2rad(deg: Double): Double {
     return deg * (Math.PI / 180)
 }
 
-fun navigateToContactAddress(carContext: CarContext, address: MyContactAddress) {
-    val intent = Intent(
-        CarContext.ACTION_NAVIGATE,
-        Uri.parse("geo:${address.latitude},${address.longitude}")
-    )
-    carContext.startCarApp(intent)
-}

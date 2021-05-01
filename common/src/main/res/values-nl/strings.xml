@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nav2Contacts</string>
+    <string name="notification_channel_name">Voorgrond service nodig voor locatie</string>
+    <string name="notification_channel_description">Nodig voor locatie service</string>
+</resources>

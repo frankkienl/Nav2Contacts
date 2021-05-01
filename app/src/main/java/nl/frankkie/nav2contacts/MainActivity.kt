@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private fun askPermission() {
         requestPermissions(
             arrayOf(
-                android.Manifest.permission.READ_CONTACTS,
+                Manifest.permission.READ_CONTACTS,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ), 1337
         )
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     private fun openNotificationSettings() {
         val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {
             putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-            putExtra(Settings.EXTRA_CHANNEL_ID, MyApplication.NOTIFICATION_CHANNEL_ID)
+            putExtra(Settings.EXTRA_CHANNEL_ID, nl.frankkie.nav2contacts.common.NOTIFICATION_CHANNEL_ID)
         }
         startActivity(intent)
     }

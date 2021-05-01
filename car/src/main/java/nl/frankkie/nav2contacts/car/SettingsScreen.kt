@@ -4,7 +4,6 @@ import androidx.preference.PreferenceManager
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.model.*
-import nl.frankkie.nav2contacts.R
 
 class SettingsScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {

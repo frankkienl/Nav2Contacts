@@ -4,7 +4,8 @@
     <string name="search">Search</string>
     <string name="about">About</string>
     <string name="about_desc">by FrankkieNL; For source-code see Github.com/frankkienl</string>
-    <string name="error_permissions">This app needs READ_CONTACTS and LOCATION permissions. Grant these permission on the phone. Then restart this app.</string>
+    <string name="error_permissions_android_auto">This app needs READ_CONTACTS and LOCATION permissions. Grant these permission on the phone. Then restart this app.</string>
+    <string name="error_permissions_aaos">This app needs READ_CONTACTS and LOCATION permissions.</string>
     <string name="search_contact">Search contact</string>
     <string name="and_1_more_address">(and 1 other address)</string>
     <string name="and_x_more_addresses">(and %s other addresses)</string>

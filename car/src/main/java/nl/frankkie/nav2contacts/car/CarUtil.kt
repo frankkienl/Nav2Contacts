@@ -30,3 +30,12 @@ fun checkRequiredPermissions(context: Context): Boolean {
     ) == PackageManager.PERMISSION_GRANTED
     return contacts && location
 }
+
+fun askRequiredPermissions(carContext: CarContext) {
+    if (isAndroidAuto(carContext)) return //only for aaos
+    //TODO: ask permissions for aaos
+}
+
+fun isAndroidAuto(context: Context) : Boolean {
+    return !context.packageManager.hasSystemFeature("android.hardware.type.automotive")
+}

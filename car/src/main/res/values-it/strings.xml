@@ -5,7 +5,8 @@
     <string name="search">Cerca</string>
     <string name="about">Info</string>
     <string name="about_desc">un\'app di FrankkieNL; Per il codice sorgente vedere Github.com/frankkienl</string>
-    <string name="error_permissions">L\'app ha bisogno dei permessi READ_CONTACTS e LOCATION. Concedi questi permessi sul telefono. In seguito riavviare l\'app.</string>
+    <string name="error_permissions_android_auto">L\'app ha bisogno dei permessi READ_CONTACTS e LOCATION. Concedi questi permessi sul telefono. In seguito riavviare l\'app.</string>
+    <string name="error_permissions_aaos">L\'app ha bisogno dei permessi READ_CONTACTS e LOCATION.</string>
     <string name="search_contact">Cerca contatto</string>
     <string name="and_1_more_address">(e un altro indirizzo)</string>
     <string name="and_x_more_addresses">(e altri %s indirizzi)</string>

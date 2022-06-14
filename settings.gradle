@@ -2,3 +2,4 @@ include ':app'
 rootProject.name = "Nav2Contacts"
 include ':common'
 include ':car'
+include ':aaos'

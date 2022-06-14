@@ -3,3 +3,4 @@ rootProject.name = "Nav2Contacts"
 include ':common'
 include ':car'
 include ':aaos'
+include ':aaos_fake_contacts'

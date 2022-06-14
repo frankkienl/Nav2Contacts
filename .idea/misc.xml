@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="aaos_fake_contacts/src/main/res/layout/activity_main.xml" value="0.3489583333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29347826086956524" />
         <entry key="common/src/main/res/drawable/ic_launcher_foreground.xml" value="0.30092592592592593" />
         <entry key="common/src/main/res/drawable/ic_settings.xml" value="0.30092592592592593" />

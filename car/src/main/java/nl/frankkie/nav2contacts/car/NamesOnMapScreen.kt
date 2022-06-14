@@ -7,16 +7,19 @@ import android.os.Handler
 import android.text.SpannableString
 import android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE
 import android.util.Log
+import androidx.car.app.CarContext
+import androidx.car.app.Screen
+import androidx.car.app.ScreenManager
+import androidx.car.app.model.*
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import androidx.car.app.CarContext
-import androidx.car.app.Screen
-import androidx.car.app.ScreenManager
-import androidx.car.app.model.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import nl.frankkie.nav2contacts.common.getDistanceFromLatLonInKm
 import nl.frankkie.nav2contacts.common.getLatLngFromAddress
 
@@ -75,10 +78,9 @@ class NamesOnMapScreen(
 
     init {
         lifecycle.addObserver(myObserver)
-
         if (action == ACTION_CONTACT) {
             //geocode all addresses
-            Thread().run {
+            CoroutineScope(Dispatchers.IO).launch {
                 contact?.addresses?.forEach { myContactAddress ->
                     val latLng = getLatLngFromAddress(
                         geocoder,
@@ -92,7 +94,7 @@ class NamesOnMapScreen(
                     }
                 }
                 geocodingDone = true
-                handler.post {
+                CoroutineScope(Dispatchers.Main).launch {
                     invalidate()
                 }
             }
@@ -161,10 +163,10 @@ class NamesOnMapScreen(
                 )
             )
             placeBuilder.setMarker(placeMarker)
-            val metadataBuilder =  Metadata.Builder()
+            val metadataBuilder = Metadata.Builder()
             metadataBuilder.setPlace(placeBuilder.build())
             rowBuilder.setMetadata(
-               metadataBuilder.build()
+                metadataBuilder.build()
             )
 
             //Distance
@@ -190,7 +192,8 @@ class NamesOnMapScreen(
             rowBuilder.addText(string)
             rowBuilder.setOnClickListener {
                 //show the destination detail screen
-                val screenManager = carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
+                val screenManager =
+                    carContext.getCarService(CarContext.SCREEN_SERVICE) as ScreenManager
                 screenManager.push(DestinationInfoScreen(carContext, contact!!, address))
             }
 

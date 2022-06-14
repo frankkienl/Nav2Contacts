@@ -7,7 +7,7 @@ import androidx.car.app.model.MessageTemplate
 import androidx.car.app.model.ParkedOnlyOnClickListener
 import androidx.car.app.model.Template
 
-class ErrorScreen(carContext: CarContext) : Screen(carContext) {
+class MissingPermissionScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {
         //Permission error
         val templateBuilder = if (isAndroidAuto(carContext)) {
@@ -24,11 +24,11 @@ class ErrorScreen(carContext: CarContext) : Screen(carContext) {
                     Action.Builder()
                         .setTitle(carContext.getText(android.R.string.ok))
                         .setOnClickListener {
-                            ParkedOnlyOnClickListener.create {
+                            //ParkedOnlyOnClickListener.create {
                                 askRequiredPermissions(
                                     carContext
                                 )
-                            }
+                            //}
                         }
                         .build()
                 )

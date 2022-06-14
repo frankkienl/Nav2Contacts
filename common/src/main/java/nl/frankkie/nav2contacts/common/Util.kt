@@ -2,6 +2,7 @@ package nl.frankkie.nav2contacts.common
 
 import android.content.Context
 import android.location.Geocoder
+import android.util.Log
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
@@ -22,9 +23,13 @@ fun getLatLngFromAddress(
     city: String,
     country: String
 ): Array<Double>? {
-    val fromLocationName = geocoder.getFromLocationName("$street, $city, $country", 1)
-    if (fromLocationName.isNotEmpty()) {
-        return arrayOf(fromLocationName[0].latitude, fromLocationName[0].longitude)
+    try {
+        val fromLocationName = geocoder.getFromLocationName("$street, $city, $country", 1)
+        if (fromLocationName.isNotEmpty()) {
+            return arrayOf(fromLocationName[0].latitude, fromLocationName[0].longitude)
+        }
+    } catch (e: Exception) {
+        Log.e("Nav2Contact", "Geocoder error", e)
     }
     return null
 }

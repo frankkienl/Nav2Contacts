@@ -5,11 +5,9 @@
     <uses-feature
         android:name="android.hardware.type.automotive"
         android:required="true" />
-    <!-- aaos //-->
     <uses-feature
         android:name="android.software.car.templates_host"
         android:required="true" />
-
     <uses-feature
         android:name="android.hardware.wifi"
         android:required="false" />
@@ -19,21 +17,34 @@
     <uses-feature
         android:name="android.hardware.screen.landscape"
         android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round">
 
-        <activity-alias
-            android:name=".MainScreen"
-            android:enabled="true"
+        <activity
             android:exported="true"
-            android:targetActivity="androidx.car.app.activity.CarAppActivity">
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
+            android:name="androidx.car.app.activity.CarAppActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <!-- Additionally include the category below ONLY for navigation apps -->
+                <!--<category android:name="android.intent.category.APP_MAPS" />-->
             </intent-filter>
+
+            <!-- Additionally include the intent-filter below ONLY for navigation apps -->
+<!--            <intent-filter>-->
+<!--                <action android:name="androidx.car.app.action.NAVIGATE" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <data android:scheme="geo" />-->
+<!--            </intent-filter>-->
 
             <meta-data
                 android:name="androidx.car.app.CAR_APP_SERVICE"
@@ -41,9 +52,9 @@
             <meta-data
                 android:name="distractionOptimized"
                 android:value="true" />
-        </activity-alias>
+        </activity>
         <meta-data
-            android:name="androidx.car.app.minApiLevel"
+            android:name="androidx.car.app.minCarApiLevel"
             android:value="2" />
         <meta-data
             android:name="com.android.automotive"

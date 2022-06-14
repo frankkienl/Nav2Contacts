@@ -15,7 +15,7 @@ class MyCarAppService : CarAppService() {
             return if (checkRequiredPermissions(carContext)) {
                 HomeScreen(carContext)
             } else {
-                ErrorScreen(carContext)
+                MissingPermissionScreen(carContext)
             }
         }
 

@@ -1,4 +1,4 @@
-package nl.frankkie.nav2contacts
+package nl.frankkie.nav2contacts.common
 
 import android.content.Context
 import android.location.Geocoder

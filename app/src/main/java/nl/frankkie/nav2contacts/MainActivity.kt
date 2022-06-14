@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             //open app settings
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)

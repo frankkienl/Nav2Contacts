@@ -17,8 +17,8 @@ import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.ScreenManager
 import androidx.car.app.model.*
-import nl.frankkie.nav2contacts.getDistanceFromLatLonInKm
-import nl.frankkie.nav2contacts.getLatLngFromAddress
+import nl.frankkie.nav2contacts.common.getDistanceFromLatLonInKm
+import nl.frankkie.nav2contacts.common.getLatLngFromAddress
 
 
 /**

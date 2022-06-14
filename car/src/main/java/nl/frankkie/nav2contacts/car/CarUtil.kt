@@ -16,7 +16,6 @@ fun navigateToContactAddress(carContext: CarContext, address: MyContactAddress) 
     carContext.startCarApp(intent)
 }
 
-
 fun checkRequiredPermissions(context: Context): Boolean {
     //formatting is hard
     val contacts = ContextCompat.checkSelfPermission(

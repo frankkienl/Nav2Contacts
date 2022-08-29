@@ -1,6 +1,7 @@
 package nl.frankkie.nav2contacts.car
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
 import android.os.Handler
@@ -22,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import nl.frankkie.nav2contacts.common.getDistanceFromLatLonInKm
 import nl.frankkie.nav2contacts.common.getLatLngFromAddress
+import kotlin.random.Random
 
 
 /**
@@ -154,7 +156,10 @@ class NamesOnMapScreen(
             rowBuilder.setTitle(addressString)
 
             //Metadata
-            val placeMarker = PlaceMarker.Builder().setColor(CarColor.GREEN)
+            //Random color for testing purposes
+            val someColor = Color.rgb(Random.nextInt(0,255),Random.nextInt(0,255),Random.nextInt(0,255))
+            //val placeMarker = PlaceMarker.Builder().setColor(CarColor.GREEN)
+            val placeMarker = PlaceMarker.Builder().setColor(CarColor.createCustom(someColor, someColor))
                 .setLabel(contactAddressesLabel++.toString()).build()
             val placeBuilder = Place.Builder(
                 CarLocation.create(

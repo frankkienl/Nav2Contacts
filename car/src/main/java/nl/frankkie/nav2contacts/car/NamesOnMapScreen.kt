@@ -151,15 +151,24 @@ class NamesOnMapScreen(
 
             val rowBuilder = Row.Builder()
 
+            //COLOR TEST
+            val testRandomColorInTitle = true
+            val someColor =
+                Color.rgb(Random.nextInt(0, 255), Random.nextInt(0, 255), Random.nextInt(0, 255))
+            val someCarColor = CarColor.createCustom(someColor, someColor)
+
             //Title
             val addressString = "${address.street}, ${address.city}"
             rowBuilder.setTitle(addressString)
 
             //Metadata
-            //Random color for testing purposes
-            val someColor = Color.rgb(Random.nextInt(0,255),Random.nextInt(0,255),Random.nextInt(0,255))
-            //val placeMarker = PlaceMarker.Builder().setColor(CarColor.GREEN)
-            val placeMarker = PlaceMarker.Builder().setColor(CarColor.createCustom(someColor, someColor))
+            val placeMarker = PlaceMarker.Builder().setColor(
+                if (testRandomColorInTitle) {
+                    someCarColor
+                } else {
+                    CarColor.GREEN
+                }
+            )
                 .setLabel(contactAddressesLabel++.toString()).build()
             val placeBuilder = Place.Builder(
                 CarLocation.create(

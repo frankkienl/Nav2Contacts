@@ -29,6 +29,6 @@
             android:resource="@xml/automotive_app_desc" />
         <meta-data
             android:name="androidx.car.app.minCarApiLevel"
-            android:value="2" />
+            android:value="5" />
     </application>
 </manifest>

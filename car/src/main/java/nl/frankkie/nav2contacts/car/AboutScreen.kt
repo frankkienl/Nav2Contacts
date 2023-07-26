@@ -9,7 +9,7 @@ import androidx.car.app.model.Template
 
 class AboutScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {
-        val messageTemplateBuilder = MessageTemplate.Builder(carContext.getString(R.string.about_desc))
+        val messageTemplateBuilder = MessageTemplate.Builder(carContext.getString(R.string.about_desc) + "\n carApiLevel: " + carContext.carAppApiLevel)
         messageTemplateBuilder.setTitle(carContext.getString(R.string.app_name))
         messageTemplateBuilder.setIcon(CarIcon.APP_ICON)
         messageTemplateBuilder.setHeaderAction(Action.BACK)

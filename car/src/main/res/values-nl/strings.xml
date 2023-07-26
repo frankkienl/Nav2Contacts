@@ -3,7 +3,7 @@
     <string name="favorites">Favorieten</string>
     <string name="search">Zoeken</string>
     <string name="about">Over</string>
-    <string name="about_desc">door FrankkieNL; Voor broncode zie: Github.com/frankkienl</string>
+    <string name="about_desc">see github.com/frankkienl</string>
     <string name="error_permissions_android_auto">De app heeft READ_CONTACTS en LOCATION permissie nodig. Geef deze permissies op de telefoon. Dan app herstarten.</string>
     <string name="error_permissions_aaos">De app heeft READ_CONTACTS en LOCATION permissie nodig.</string>
     <string name="nearby">Dichtbij</string>

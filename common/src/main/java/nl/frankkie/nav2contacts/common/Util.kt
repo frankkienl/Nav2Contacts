@@ -25,7 +25,7 @@ fun getLatLngFromAddress(
 ): Array<Double>? {
     try {
         val fromLocationName = geocoder.getFromLocationName("$street, $city, $country", 1)
-        if (fromLocationName.isNotEmpty()) {
+        if (!fromLocationName.isNullOrEmpty()) {
             return arrayOf(fromLocationName[0].latitude, fromLocationName[0].longitude)
         }
     } catch (e: Exception) {
